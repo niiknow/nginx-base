@@ -10,3 +10,5 @@ fi
 # starting 
 cd /etc/init.d/
 ./nginx start
+
+bash /root/bin/my-startup.sh

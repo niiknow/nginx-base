@@ -10,8 +10,8 @@ RUN \
     cd /tmp \
     && apt-get -o Acquire::GzipIndexes=false update \
     && apt-get update && apt-get -y upgrade \
-    && apt-get -y install wget curl unzip nano vim rsync sudo tar git apt-transport-https gettext-base ca-certificates  \
-        apt-utils software-properties-common build-essential openssl inotify-tools nginx letsencrypt \
+    && apt-get -y install wget curl unzip nano vim rsync sudo tar git apt-transport-https ca-certificates dnsmasq \
+        apt-utils software-properties-common build-essential openssl inotify-tools gettext-base nginx certbot \
 
     && rm -rf /tmp/* \
     && apt-get -yf autoremove \
@@ -26,7 +26,7 @@ RUN \
     && mkdir -p /app-start/var/log \
     && mkdir -p /app-start/var/www \
 
-    && mv /etc/app   /app-start/etc/nginx \
+    && mv /etc/nginx   /app-start/etc/nginx \
     && rm -rf /etc/nginx \
     && ln -s /app/etc/nginx /etc/nginx \
 
@@ -43,6 +43,8 @@ RUN \
     && ln -s /app/var/www/html /var/www/html \
 
     && rm -rf /tmp/*
+
+ENV WEBROOT_PATH=/app/var/www/html
 
 VOLUME ["/app", "/backup"]
 
