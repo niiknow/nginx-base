@@ -47,4 +47,4 @@ ENV WEBROOT_PATH=/app/var/www/html
 
 VOLUME ["/app", "/backup"]
 
-EXPOSE 22 80 443
+EXPOSE 80 443
