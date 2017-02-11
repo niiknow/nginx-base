@@ -42,6 +42,7 @@ RUN \
     && rm -rf /var/www/html \
     && ln -s /app/var/www/html /var/www/html \
 
+    && openssl dhparam -out /app/etc/nginx/dhparam.pem 4096 \
     && rm -rf /tmp/*
 
 ENV WEBROOT_PATH=/app/var/www/html
