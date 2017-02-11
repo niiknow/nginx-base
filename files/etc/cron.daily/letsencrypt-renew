@@ -1,0 +1,2 @@
+#!/bin/bash
+/usr/bin/letsencrypt renew --quiet --no-self-upgrade
