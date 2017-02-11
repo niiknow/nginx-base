@@ -38,6 +38,7 @@ done
 
 /usr/local/bin/letsencrypt certonly \
     --webroot -w /var/www/html \
-    --text --renew-by-default --agree-tos \
+    --text --renew-by-default --agree-tos -n \
+    --staple-ocsp --cert-name mainsite \
       $domain_args \
-  --email=$EMAIL
+    --email=$EMAIL

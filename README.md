@@ -1,2 +1,2 @@
-# nginx-hitcounter
-Docker nginx hit counter with Letsencrypt and AWS CLI
+# nginx-base
+Docker nginx base with Letsencrypt and AWS CLI

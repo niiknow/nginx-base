@@ -1,0 +1,54 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    #NGINX_INSERT1;
+
+    root /var/www/html
+
+    #NGINX_INSERT2;
+
+    # Add index.php to the list if you are using PHP
+    index index.html index.htm index.nginx-debian.html;
+
+    server_name _;
+
+    #NGINX_INSERT3;
+
+    location / {
+        # First attempt to serve request as file, then
+        # as directory, then fall back to displaying a 404.
+        try_files $uri $uri/ =404;
+    }
+    
+    #NGINX_INSERT4;
+}
+
+server {
+    listen 443 default_server;
+    listen [::]:443 default_server;
+    root /var/www/html;
+
+    #NGINX_INSERT1;
+
+    ssl         on;
+    ssl_certificate      /app/etc/nginx/ssl/example.pem;
+    ssl_certificate_key  /app/etc/nginx/ssl/example.key;
+
+    #NGINX_INSERT2;
+
+    # Add index.php to the list if you are using PHP
+    index index.html index.htm index.nginx-debian.html;
+
+    server_name _;
+
+    #NGINX_INSERT3;
+
+    location / {
+        # First attempt to serve request as file, then
+        # as directory, then fall back to displaying a 404.
+        try_files $uri $uri/ =404;
+    }
+
+    #NGINX_INSERT4;
+}
