@@ -15,7 +15,7 @@ RUN \
 
     && rm -rf /tmp/* \
     && apt-get -yf autoremove \
-    && apt-get clean 
+    && apt-get clean autoclean
 
 ADD ./files /
 
