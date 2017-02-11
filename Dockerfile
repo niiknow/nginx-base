@@ -23,6 +23,7 @@ ADD ./files /
 RUN \
     cd /tmp \
     && mkdir -p /app-start/etc/letsencrypt \
+    && chmod 0755 /app-start/etc/letsencrypt \
     && ln -s /app/etc/letsencrypt /etc/letsencrypt \
 
     && mkdir -p /app-start/var/log \
