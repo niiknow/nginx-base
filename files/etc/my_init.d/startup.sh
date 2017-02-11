@@ -2,9 +2,9 @@
 
 export TERM=xterm
 
-if [ -z "`ls /hitcounter --hide='lost+found'`" ]
+if [ -z "`ls /app --hide='lost+found'`" ]
 then
-    rsync -a /hitcounter-start/* /hitcounter
+    rsync -a /app-start/* /app
 fi
 
 # starting 

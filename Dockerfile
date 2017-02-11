@@ -22,17 +22,15 @@ ADD ./files /
 # tweaks
 RUN \
     cd /tmp \
-    && mkdir -p /app-start/etc \
+    && mkdir -p /app-start/etc/letsencrypt \
+    && ln -s /app/etc/letsencrypt /etc/letsencrypt \
+
     && mkdir -p /app-start/var/log \
     && mkdir -p /app-start/var/www \
 
     && mv /etc/nginx   /app-start/etc/nginx \
     && rm -rf /etc/nginx \
     && ln -s /app/etc/nginx /etc/nginx \
-
-    && mv /etc/letsencrypt   /app-start/etc/letsencrypt \
-    && rm -rf /etc/letsencrypt \
-    && ln -s /app/etc/letsencrypt /etc/letsencrypt \
 
     && mv /var/log/nginx   /app-start/var/log/nginx \
     && rm -rf /var/log/nginx \
