@@ -23,8 +23,8 @@ ADD ./files /
 RUN \
     cd /tmp \
     && mkdir -p /app-start/etc \
-    && mkdir -p /app-start/var/log/app \
-    && mkdir -p /app-start/var/www/html \
+    && mkdir -p /app-start/var/log \
+    && mkdir -p /app-start/var/www \
 
     && mv /etc/app   /app-start/etc/nginx \
     && rm -rf /etc/nginx \
