@@ -36,6 +36,7 @@ RUN \
 
     && mkdir -p /app-start/var/log \
     && mkdir -p /app-start/var/www \
+    && mkdir -p /app-start/var/spool \
     && chown -R www-data:www-data /app-start/var/www \
 
     && mv /etc/nginx   /app-start/etc/nginx \
@@ -50,6 +51,10 @@ RUN \
     && rm -rf /var/www/html \
     && ln -s /app/var/www/html /var/www/html \
     && chown -R www-data:www-data /app-start/var/www/html \
+
+    && mv /var/spool/cron   /app-start/var/spool/cron \
+    && rm -rf /var/spool/cron \
+    && ln -s /app/var/spool/cron /var/spool/cron \
 
 # generate fake ssl for mainsite conf, do letsencrypt later
     && rm -rf /tmp/*

@@ -20,3 +20,8 @@ if [ -n "$DOMAINS" ] ; then
 	ln -s /etc/letsencrypt/live/$DOMAIN/privkey.pem /app/etc/nginx/ssl/example-privkey.pem
 	service nginx reload
 fi
+
+# hitcounter instruction: link nginx conf, provide AWS ENV, then setup contab
+# rm -f /etc/nginx/sites-enabled/mainsite
+# ln -s /etc/nginx/sites-available/hitcounter /etc/nginx/sites-enabled/hitcounter
+# (crontab -l ; echo "* * * * * /root/bin/hc-logship.sh s3-bucket-name/folder-name") | sort - | uniq - | crontab -
