@@ -57,7 +57,9 @@ shipLogs() {
 }
 
 # trigger log rotation or creation of new log
-curl http://127.0.0.1/null/clean-logs
+curl http://127.0.0.1/null/rotate
+# a little sleep to wait for new log
 sleep 2
+
 collectLogs
 shipLogs
