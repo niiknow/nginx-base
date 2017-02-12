@@ -26,6 +26,8 @@ RUN \
     && mv /etc/nginx/nginx.new /etc/nginx/nginx.conf \
     && rm -f /etc/nginx/sites-enabled/default \
     && ln -s /etc/nginx/sites-available/mainsite /etc/nginx/sites-enabled/mainsite \
+
+# generate fake ssl for mainsite conf, do letsencrypt later
     && bash /root/bin/example-ssl.sh \
     && chown -R www-data:www-data /var/log/nginx \
     && chown -R www-data:www-data /var/www \
@@ -56,7 +58,6 @@ RUN \
     && rm -rf /var/spool/cron \
     && ln -s /app/var/spool/cron /var/spool/cron \
 
-# generate fake ssl for mainsite conf, do letsencrypt later
     && rm -rf /tmp/*
 
 ENV WEBROOT_PATH=/app/var/www/html

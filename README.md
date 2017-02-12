@@ -1,5 +1,5 @@
 # nginx-base
-Docker nginx base with Letsencrypt and AWS CLI
+Docker nginx with Letsencrypt and AWS CLI.  
 
 ## run
 
@@ -16,9 +16,10 @@ niiknow/nginx-base
 ```
 
 ## Environment variables:
-
  - EMAIL - the email address to obtain certificates on behalf of.
  - DOMAINS - a space separated list of domains to obtain a certificate for.
- - AWS_ACCESS_KEY_ID - optionally for awscli
- - AWS_SECRET_ACCESS_KEY - optionally for awscli
- - AWS_DEFAULT_REGION - optionally for awscli
+ - AWS_ACCESS_KEY_ID - for awscli
+ - AWS_SECRET_ACCESS_KEY - for awscli
+ - AWS_DEFAULT_REGION - for awscli
+
+EMAIL and DOMAINS environment variable are not required unless you want to use Letsencrypt.  Same goes for AWS environment variable unless you want to do backup with AWS CLI.
