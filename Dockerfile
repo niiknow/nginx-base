@@ -28,6 +28,7 @@ RUN \
     && ln -s /etc/nginx/sites-available/mainsite /etc/nginx/sites-enabled/mainsite \
     && bash /root/bin/example-ssl.sh \
     && chown -R www-data:www-data /var/log/nginx \
+    && chown -R www-data:www-data /var/www \
 
     && mkdir -p /app-start/etc/letsencrypt \
     && chmod 0755 /app-start/etc/letsencrypt \
@@ -35,6 +36,7 @@ RUN \
 
     && mkdir -p /app-start/var/log \
     && mkdir -p /app-start/var/www \
+    && chown -R www-data:www-data /app-start/var/www \
 
     && mv /etc/nginx   /app-start/etc/nginx \
     && rm -rf /etc/nginx \
