@@ -15,7 +15,12 @@ RUN \
 
     && rm -rf /tmp/* \
     && apt-get -yf autoremove \
-    && apt-get clean autoclean
+    && apt-get clean autoclean \
+
+# re-enable all default services
+    && rm -f /etc/service/syslog-forwarder/down \
+    && rm -f /etc/service/cron/down \
+    && rm -f /etc/service/syslog-ng/down
 
 ADD ./files /
 
