@@ -27,6 +27,7 @@ RUN \
     && rm -f /etc/nginx/sites-enabled/default \
     && ln -s /etc/nginx/sites-available/mainsite /etc/nginx/sites-enabled/mainsite \
     && bash /root/bin/example-ssl.sh \
+    && chown -R www-data:www-data /var/log/nginx \
 
     && mkdir -p /app-start/etc/letsencrypt \
     && chmod 0755 /app-start/etc/letsencrypt \
