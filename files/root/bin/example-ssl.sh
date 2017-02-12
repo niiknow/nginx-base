@@ -27,6 +27,6 @@ emailAddress=
 mkdir -p "$SSL_DIR"
 
 # Generate our Private Key, CSR and Certificate
-openssl genrsa -out "$SSL_DIR/example.key" 2048
-openssl req -new -subj "$(echo -n "$SUBJ" | tr "\n" "/")" -key "$SSL_DIR/example.key" -out "$SSL_DIR/example.csr" -passin pass:$PASSPHRASE
-openssl x509 -req -days 3650 -in "$SSL_DIR/example.csr" -signkey "$SSL_DIR/example.key" -out "$SSL_DIR/example.pem"
+openssl genrsa -out "$SSL_DIR/example-privkey.pem" 2048
+openssl req -new -subj "$(echo -n "$SUBJ" | tr "\n" "/")" -key "$SSL_DIR/example-privkey.pem" -out "$SSL_DIR/example.csr" -passin pass:$PASSPHRASE
+openssl x509 -req -days 3650 -in "$SSL_DIR/example.csr" -signkey "$SSL_DIR/example-privkey.pem" -out "$SSL_DIR/example-fullchain.pem"

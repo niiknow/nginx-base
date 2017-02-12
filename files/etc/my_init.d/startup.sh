@@ -5,7 +5,12 @@ export TERM=xterm
 if [ -z "`ls /app --hide='lost+found'`" ]
 then
     rsync -a /app-start/* /app
-    bash /root/bin/example-ssl.sh
+fi
+
+# if file exists
+if [ -f /app/etc/nginx/nginx.new ]; then
+	mv /app/etc/nginx/nginx.conf /app/etc/nginx/nginx.old
+	mv /app/etc/nginx/nginx.new /app/etc/nginx/nginx.conf
 fi
 
 # starting 

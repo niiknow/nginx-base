@@ -20,33 +20,20 @@ log() {
   else echo; fi
 }
 
-
-#######################################
-# collect nginx logs
-#######################################
-cleanLogs() {
-  # trigger log rotation or creation of new log
-  curl http://127.0.0.1/null/clean-logs
-
-  # find /var/log/sync/ -maxdepth 1 -mmin +10 -type f -name "*.hc-access.log" -exec rm -f {} \;
-
-  # wait for new log creation to complete
-  sleep 2
-}
-
 #######################################
 # collect nginx logs
 #######################################
 collectLogs() {
   # Collecting the matching files in a Bash *array*:
-  IFS=$'\n' read -d '' -ra files  < <(ls -tp /var/log/nginx/*.hc-access.log | grep -v '/$' | tail -n +1)
-  for i in "${IFS[@]}"
+  filetxt=$(ls -tp /var/log/nginx/*.hc-access.log | grep -v '/$' | tail -n +2)
+  files=(${filetxt//$'\n'/ })
+  for i in "${files[@]}"
   do
     DEST_FILE=$(sed -i -e 's/\/nginx\//\/sync\//g' <<< "$i")
 
     # if [ ! -f $DEST_FILE ]; then
       # split by ? and space
-      awk 'BEGIN{FS="[? ]"}{print $7}' $i | grep /pi/ | sort | uniq -c > $DEST_FILE
+      awk 'BEGIN{FS="[? ]"}{print $7}' $i | grep /pi/ | sort | uniq -c | tee $DEST_FILE > /dev/null
 
       # delete processed file so we don't process it again
       rm -f $i
@@ -69,6 +56,8 @@ shipLogs() {
   rm -rf /var/log/sync/*
 }
 
-cleanLogs
+# trigger log rotation or creation of new log
+curl http://127.0.0.1/null/clean-logs
+sleep 2
 collectLogs
 shipLogs

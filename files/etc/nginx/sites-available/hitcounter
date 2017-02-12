@@ -16,7 +16,7 @@ server {
 
     access_log /var/log/nginx/$year-$month-$day.$hour-$minutes.hc-access.log;
 
-    root /var/www/html
+    root /var/www/html;
 
     #NGINX_INSERT2;
 
@@ -27,7 +27,12 @@ server {
 
     #NGINX_INSERT3;
 
-    location ~ /pi/(.*) {
+    location ~ ^/pi/([a-z0-9-]+)/([^/]+)$ {
+
+        if ($arg_ua ~* ^-?[0-9]\d*(\.\d+)?$) {    
+            return 301 https://www.google-analytics.com/collect?cid=$1.$pid&z=$msec&v=1&t=event&tid=UA-$arg_ua&ev=1&ec=$1&ea=$2&el=$arg_el;
+        }
+
         add_header Access-Control-Allow-Origin "*";
         empty_gif;
     }
@@ -54,8 +59,8 @@ server {
     #NGINX_INSERT0;
 
     ssl         on;
-    ssl_certificate      /app/etc/nginx/ssl/example.pem;
-    ssl_certificate_key  /app/etc/nginx/ssl/example.key;
+    ssl_certificate      /app/etc/nginx/ssl/example-fullchain.pem;
+    ssl_certificate_key  /app/etc/nginx/ssl/example-privkey.pem;
 
     #NGINX_INSERT1;
 
@@ -68,9 +73,9 @@ server {
         set $seconds $6;
     }
 
-    access_log /var/log/nginx/$year-$month-$day_$hour-$minutes-access.log;
+    access_log /var/log/nginx/$year-$month-$day.$hour-$minutes.hc-access.log;
 
-    root /var/www/html
+    root /var/www/html;
 
     #NGINX_INSERT2;
 
@@ -81,7 +86,11 @@ server {
 
     #NGINX_INSERT3;
 
-    location ~ /pi/(.*) {
+    location ~ ^/pi/([a-z0-9-]+)/([^/]+)$ {
+        if ($arg_ua ~* ^-?[0-9]\d*(\.\d+)?$) {    
+            return 301 https://www.google-analytics.com/collect?cid=$1.$pid&z=$msec&v=1&t=event&tid=UA-$arg_ua&ev=1&ec=$1&ea=$2&el=$arg_el;
+        }
+
         add_header Access-Control-Allow-Origin "*";
         empty_gif;
     }

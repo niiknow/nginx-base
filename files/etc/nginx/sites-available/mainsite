@@ -4,7 +4,7 @@ server {
 
     #NGINX_INSERT1;
 
-    root /var/www/html
+    root /var/www/html;
 
     #NGINX_INSERT2;
 
@@ -32,8 +32,8 @@ server {
     #NGINX_INSERT1;
 
     ssl         on;
-    ssl_certificate      /app/etc/nginx/ssl/example.pem;
-    ssl_certificate_key  /app/etc/nginx/ssl/example.key;
+    ssl_certificate      /app/etc/nginx/ssl/example-fullchain.pem;
+    ssl_certificate_key  /app/etc/nginx/ssl/example-privkey.pem;
 
     #NGINX_INSERT2;
 

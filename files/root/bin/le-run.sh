@@ -36,9 +36,9 @@ do
    # do whatever on $i
 done
 
-/usr/local/bin/letsencrypt certonly \
+/usr/bin/letsencrypt certonly \
     --webroot -w /var/www/html \
     --text --renew-by-default --agree-tos -n \
-    --staple-ocsp --cert-name mainsite \
+    --cert-name mainsite \
       $domain_args \
     --email=$EMAIL

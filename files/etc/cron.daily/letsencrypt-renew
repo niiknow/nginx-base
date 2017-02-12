@@ -1,2 +1,5 @@
 #!/bin/bash
-/usr/local/bin/letsencrypt renew --quiet --no-self-upgrade
+/usr/bin/letsencrypt renew --quiet --no-self-upgrade
+
+# always reload nginx
+servce nginx reload
