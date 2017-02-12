@@ -1,9 +1,12 @@
 #!/bin/bash
 cd /root/bin/
 
-# output is not success then exit
-if test $(./le-run.sh | tee ../letsencrypt.init.log | grep -c 'Congratulations') -eq 0; then
-	exit 1
+if [![ -z "$EMAIL" ]] ; then
+  # output is not success then exit
+  if test $(./le-run.sh | tee ../letsencrypt.init.log | grep -c 'Congratulations') -eq 0; then
+  	echo 'letsencrypt failed'
+    exit 1
+  fi
 fi
 
 # linking the cert and restart nginx
