@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /root/bin/
 
-if [![ -z "$EMAIL" ]] ; then
+if [ -n "$EMAIL" ] ; then
   # output is not success then exit
   if test $(./le-run.sh | tee ../letsencrypt.init.log | grep -c 'Congratulations') -eq 0; then
   	echo 'letsencrypt failed'
