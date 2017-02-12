@@ -39,6 +39,5 @@ done
 /usr/bin/letsencrypt certonly \
     --webroot -w /var/www/html \
     --text --renew-by-default --agree-tos -n \
-    --cert-name mainsite \
       $domain_args \
     --email=$EMAIL
