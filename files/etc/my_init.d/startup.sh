@@ -4,13 +4,14 @@ export TERM=xterm
 
 if [ -z "`ls /app --hide='lost+found'`" ]
 then
-    rsync -a /app-start/* /app
+    mkdir -p /app
+    rsync -a /app-start/* /app/
 fi
 
 # if file exists
-if [ -f /app/etc/nginx/nginx.new ]; then
-	mv /app/etc/nginx/nginx.conf /app/etc/nginx/nginx.old
-	mv /app/etc/nginx/nginx.new /app/etc/nginx/nginx.conf
+if [ -f /etc/nginx/nginx.new ]; then
+	mv /etc/nginx/nginx.conf /etc/nginx/nginx.old
+	mv /etc/nginx/nginx.new /etc/nginx/nginx.conf
 fi
 
 # starting 
