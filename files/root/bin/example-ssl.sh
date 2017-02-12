@@ -2,7 +2,7 @@
 
 # Specify where we will install
 # the example.local certificate
-SSL_DIR="/app/etc/nginx/ssl"
+SSL_DIR="/etc/nginx/ssl"
 
 # Set the wildcarded domain
 # we want to use

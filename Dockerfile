@@ -22,8 +22,11 @@ ADD ./files /
 # tweaks
 RUN \
     cd /tmp \
+    && mv /etc/nginx/nginx.conf /etc/nginx/nginx.old \
+    && mv /etc/nginx/nginx.new /etc/nginx/nginx.conf \
     && rm -f /etc/nginx/sites-enabled/default \
     && ln -s /etc/nginx/sites-available/mainsite /etc/nginx/sites-enabled/mainsite \
+    && bash /root/bin/example-ssl.sh \
 
     && mkdir -p /app-start/etc/letsencrypt \
     && chmod 0755 /app-start/etc/letsencrypt \
@@ -46,7 +49,6 @@ RUN \
     && chown -R www-data:www-data /app-start/var/www/html \
 
 # generate fake ssl for mainsite conf, do letsencrypt later
-    && bash /root/bin/example-ssl.sh \
     && rm -rf /tmp/*
 
 ENV WEBROOT_PATH=/app/var/www/html
