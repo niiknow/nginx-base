@@ -46,7 +46,7 @@ RUN \
     && chown -R www-data:www-data /app-start/var/www/html \
 
 # generate fake ssl for mainsite conf, do letsencrypt later
-    && bash /root/bin/example-ssl.sh
+    && bash /root/bin/example-ssl.sh \
     && rm -rf /tmp/*
 
 ENV WEBROOT_PATH=/app/var/www/html
