@@ -59,9 +59,10 @@ RUN \
     && ln -s /app/var/www/html /var/www/html \
     && chown -R www-data:www-data /app-start/var/www/html \
 
-    && mv /var/spool/cron   /app-start/var/spool/cron \
-    && rm -rf /var/spool/cron \
-    && ln -s /app/var/spool/cron /var/spool/cron \
+# link root to save root crontab if any?
+    && mv /root   /app-start/root \
+    && rm -rf /root \
+    && ln -s /app/root /root \
 
     && rm -rf /tmp/*
 
