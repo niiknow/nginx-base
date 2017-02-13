@@ -47,13 +47,15 @@ collectLogs() {
 shipLogs() {
   # delete empty files
   find /var/log/sync/ -size 0 -exec rm -f {} \;
+  if [ -n "`ls /var/log/sync/*.hc-access.log`" ] ;
+  then
+    # aws sync dest file to s3
+    aws s3 sync "/var/log/sync/" "s3://$backup_dest/" --exclude="*" --include "*.hc-access.log"
 
-  # aws sync dest file to s3
-  aws s3 sync "/var/log/sync/" "s3://$backup_dest/" --exclude="*" --include "*.hc-access.log"
-
-  # aws cli does not sync file that exists remotely
-  # but it's probably good to delete it locally for house keeping sake
-  rm -rf /var/log/sync/*
+    # aws cli does not sync file that exists remotely
+    # but it's probably good to delete it locally for house keeping sake
+    rm -rf /var/log/sync/*
+  fi
 }
 
 # trigger log rotation or creation of new log
