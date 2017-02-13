@@ -7,10 +7,12 @@ if [ -n "$DOMAINS" ] ; then
 
     # only generate domain if not exists
 	if [ ! -f /etc/letsencrypt/live/$MYDOMAIN/fullchain.pem ]; then
+		# wait for nginx to start
+		sleep 2
 		# output is not success then exit
 		if test $(./le-run.sh | tee ../letsencrypt.init.log | grep -c 'Congratulations') -eq 0; then
-			echo "letsencrypt failed"
-			exit 1
+			echo "letsencrypt failed, please restart docker or rerun /root/le-run.sh"
+			exit 0
 		fi
 
 		echo "reloading domain ssl"
