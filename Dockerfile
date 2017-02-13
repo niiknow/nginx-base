@@ -10,7 +10,7 @@ RUN \
     cd /tmp \
     && apt-get -o Acquire::GzipIndexes=false update \
     && apt-get update && apt-get -y upgrade \
-    && apt-get -y install wget curl unzip nano vim rsync sudo tar git apt-transport-https ca-certificates dnsmasq \
+    && apt-get -y install wget curl unzip nano vim rsync sudo tar git apt-transport-https ca-certificates dnsmasq awscli \
         apt-utils software-properties-common build-essential openssl inotify-tools gettext-base nginx letsencrypt \
 
     && rm -rf /tmp/* \

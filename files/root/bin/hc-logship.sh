@@ -1,6 +1,6 @@
 #!/bin/bash
-PATH="/root/bin:/root/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
-export PATH
+export $(cat /root/env.txt | xargs)
+
 backup_dest=$(sed 's/\/*$//' <<< "$1")
 backup_dest=$(sed 's/^\/*//' <<< "$backup_dest")
 mkdir -p /var/log/sync/
@@ -29,11 +29,11 @@ collectLogs() {
   files=(${filetxt//$'\n'/ })
   for i in "${files[@]}"
   do
-    DEST_FILE=$(sed -i -e 's/\/nginx\//\/sync\//g' <<< "$i")
+    DEST_FILE=$(sed 's/nginx/sync/g' <<< "$i")
 
     # if [ ! -f $DEST_FILE ]; then
       # split by ? and space
-      awk 'BEGIN{FS="[? ]"}{print $7}' $i | grep /pi/ | sort | uniq -c | tee $DEST_FILE > /dev/null
+      awk 'BEGIN{FS="[? ]"}{print $7}' $i | grep /pi/ | sort | uniq -c | tee $DEST_FILE
 
       # delete processed file so we don't process it again
       rm -f $i
